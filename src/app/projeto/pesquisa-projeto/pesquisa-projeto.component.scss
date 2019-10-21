@@ -1,0 +1,31 @@
+button#btn {
+    margin-right: 10px;
+}
+.card-header {
+    background-color: cornflowerblue;
+}
+
+.versao{
+     border-width: 1px;
+    border-style: solid;
+    border-color: rgb(96, 139, 231);
+    color: white;
+    background-color: rgb(96, 139, 231);
+    padding: 3px;
+    font-size: 12px;
+    border-radius: 5px 5px;
+    // font-weight: bold;
+    
+}
+
+.botao{
+    float:right
+    }
+
+.nomeAutor{
+
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 25px;
+    color: aliceblue;
+    font-weight: bold;
+    }

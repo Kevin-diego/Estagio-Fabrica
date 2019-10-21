@@ -1,0 +1,27 @@
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Icon -->
+    <div class="imgLogin">
+      <img src="../assets/img/img1.png" style="width: 150px; height: 150px;">
+     </div>
+
+    <!-- Login Form -->
+    <form>
+      <input type="text" id="login" class="fadeIn second" name="login" placeholder="Usuario">
+      <input type="text" id="password" class="fadeIn third" name="senha" placeholder="Senha">
+      <div class="btnLogin">
+        <button type="button" class="btn btn-primary" (click)="button()">Entrar</button>
+      </div>
+    </form>
+
+    <!-- Remind Passowrd -->
+    <div id="formFooter">
+      <button class="underlineHover" (click)="buttonRecuperar()"href="#">Esqueceu a Senha?</button><p></p>
+      <button class="underlineHover" (click)="buttonForm()"href="#">Cadastra-se?</button>
+    </div>
+
+
+  </div>
+</div>

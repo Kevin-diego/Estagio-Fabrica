@@ -1,0 +1,37 @@
+<div class="card">
+    <div class="card-body">
+      
+    </div>
+</div>
+
+
+<div class="container" *ngFor="let projeto of listaProjetos">
+
+  <div class="card">
+      <div class="card-header">
+        <span class="nomeAutor">{{projeto.autor}}</span>
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">{{projeto.nome}}</h3>
+       
+        <div class="row"> 
+            <div class="col-12 col-sm-2">
+              <span style="font-weight: bold">Versão: </span> <label class="versao"> {{projeto.versao}} </label>
+            </div>          
+
+            <div class="col-12 col-sm-10">
+                <span style="font-weight: bold">Data Criação:</span> {{projeto.dataCriacao}}   <span style="font-weight: bold">Data Atualização:</span> {{projeto.dataAtualizacao}}
+            </div>    
+          </div>
+
+        <p class="card-text">{{projeto.descricao}}</p>
+       
+        <div class="botao">
+            <button type="button" class="btn btn-primary" id="btn"><i class="fas fa-download"></i></button>
+            <button type="button" class="btn btn-warning" id="btn"><i class="fas fa-pencil-alt"></i></button>
+            <button type="button" class="btn btn-danger"  id="btn"><i class="fas fa-trash"></i></button>
+        </div>
+      </div>
+    </div>
+    <br>
+</div>
