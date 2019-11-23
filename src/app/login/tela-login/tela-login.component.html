@@ -8,13 +8,20 @@
      </div>
 
     <!-- Login Form -->
-    <form>
-      <input type="text" id="login" class="fadeIn second" name="login" placeholder="Usuario">
-      <input type="text" id="password" class="fadeIn third" name="senha" placeholder="Senha">
-      <div class="btnLogin">
-        <button type="button" class="btn btn-primary" (click)="button()">Entrar</button>
-      </div>
-    </form>
+    <div class="container">
+      <form >
+        <div style="margin-bottom: 10px;">
+          <input type="email" id="login" class="form-control" placeholder="email"
+           pInputText [(ngModel)]="email"  name="email">
+        </div>
+        <input type="password" id="password" class="form-control" pInputText [(ngModel)]="senha"
+           name="senha" placeholder="Senha">
+        
+        <div class="btnLogin">
+          <button type="button" class="btn btn-primary" (click)="buttonEntar(email, senha)" [disabled]="email.invalid">Entrar</button>
+        </div>
+      </form>
+    </div>
 
     <!-- Remind Passowrd -->
     <div id="formFooter">

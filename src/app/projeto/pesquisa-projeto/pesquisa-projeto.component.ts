@@ -1,7 +1,11 @@
-import { Pessoa } from './../../../dominios/Pessoas';
+import { element } from 'protractor';
+import { Usuario } from 'src/dominios/Usuario';
+
 import { Projetos } from './../../../dominios/Projetos';
 import { Component, OnInit } from '@angular/core';
 import { ProjetoService } from '../projeto.service';
+import Swal from 'sweetalert2';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-pesquisa-projeto',
@@ -9,41 +13,90 @@ import { ProjetoService } from '../projeto.service';
   styleUrls: ['./pesquisa-projeto.component.scss']
 })
 export class PesquisaProjetoComponent implements OnInit {
-
-  // arquivos = [
-  //   {id: 1, nome: "RepositorioUnidesc", autor: "Kevin", descricao: "Projeto funcionandoajsdhajsdhjashdjhasdjh", versao: "1.0", dataCriacao: "12/12/12", dataUpdate: "13/13/13"},
-  //   {id: 2, nome: "UnidescLocaliza", autor: "Marcos", descricao: "Projetoaklsndkasdkajskdjskdjskd", versao: "1.5", dataCriacao: "12/12/13", dataUpdate: "14/13/13"},
-  //   {id: 2, nome: "UnidescLocaliza", autor: "Marcos", descricao: "Projetoaklsndkasdkajskdjskdjskd", versao: "1.5", dataCriacao: "12/12/13", dataUpdate: "14/13/13"},
-  //   {id: 2, nome: "UnidescLocaliza", autor: "Marcos", descricao: "Projetoaklsndkasdkajskdjskdjskd", versao: "1.5", dataCriacao: "12/12/13", dataUpdate: "14/13/13"},
-  //   {id: 2, nome: "UnidescLocaliza", autor: "Marcos", descricao: "Projetoaklsndkasdkajskdjskdjskd", versao: "1.5", dataCriacao: "12/12/13", dataUpdate: "14/13/13"}
-  // ]
+  listarUsuarioProjeto: Projetos[]=[];
   listaProjetos: Projetos[]=[];
-  // pessoas: Pessoa[]=[];//teste api
-  constructor( private ps: ProjetoService){
+  listarUsuarios: Usuario[]=[];
+  projeto: Projetos = new Projetos();
+  nome: string = "";
+  
+
+  constructor( private ps: ProjetoService, private route: ActivatedRoute, private router: Router){
 
    }
 
   ngOnInit() {
-    // this.findAl();//teste da api
-    this.findAll();
-    
-    
-    
+    this.listarUsuario();
   }
 
+  listarUsuario(){
+    this.ps.listarUsuario().subscribe(dadosDoServidor=>{
+      this.listarUsuarios = dadosDoServidor;
+
+    }, error=>{});
+  }
 
   findAll(){
     this.ps.findAll().subscribe(dadosDoServidor=>{
-      this.listaProjetos = dadosDoServidor;  
-      console.log( this.listaProjetos);
-      
+      this.listaProjetos = dadosDoServidor;
     }, error=>{});
     }
   
-  // findAl(){ //teste da api
-  //   this.ps.findTest().subscribe(dadosDoServidor=>{
-  //     this.pessoas = dadosDoServidor;  
-  //     console.log(this.pessoas);
-  //   }, error=>{});
-  //   }
+    excluirPorId(id: number): string {
+      let resposta: string;
+  
+      this.ps.deletar(id).subscribe(dadosDoServidor => {
+        Swal({
+  
+          type: 'success',
+          text: 'Deletado',
+          title: 'Projeto Excluido Com Sucesso!',
+          showConfirmButton: false,
+          timer: 2500
+        })
+        this.listarUsuario();
+      }, error => {
+      });
+      return resposta;
+    }
+  
+  
+    modalExcluir(id: number) {
+      Swal({
+        title: "<strong>Atenção</strong>",
+        type: "warning",
+        html: "<b> Tem certeza que desaja excluir o Projeto?",
+        showCloseButton: true,
+        showCancelButton: true,
+        focusConfirm: false,
+        confirmButtonAriaLabel: "Thumbs up, great!",
+        cancelButtonText: "Não",
+        cancelButtonAriaLabel: "Thumbs down"
+  
+      }).then(ok => {
+        if (ok.value) {
+          this.excluirPorId(id);
+        }
+      });
+    }
+  
+    chamarFormulario(p: Projetos) { 
+           this.projeto = p;
+      this.router.navigate(['pesquisa-projeto/form-projeto',this.projeto.idProjeto],{
+        queryParams: { nome: 'Kevin ', projeto: JSON.stringify(p)},
+        skipLocationChange: true
+      });
+    }
+
+    searchByName(){
+      this.ps.searchByName(this.nome).subscribe(dadosDoServidor=>{
+            
+      this.listarUsuarios = dadosDoServidor;
+      },
+        error=>{});
+    
+    }
+
+    buttonFormProjeto(): void {
+      this.router.navigate(['/pesquisa-projeto/form-projeto']);  
+    }
 }

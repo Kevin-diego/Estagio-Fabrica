@@ -1,11 +1,13 @@
 <div class="container">
   <div class="recuperar">
     <label for="">Digite seu email para recuperar a senha:</label>
-    <input type="email" class="form-control">
+    <input type="email" class="form-control" placeholder="E-mail">
 
     <div class="btnRecuperar">
-        <button type="button" class="btn btn-primary">Enviar</button>
-    </div>
+
+        <button type="button" class="btn btn-primary" style="margin-right: 10px;">Enviar</button>
+        <button type="button" class="btn btn-danger" (click)="buttonVoltar()" id="btnVoltar">Voltar</button>
+    
+      </div>
   </div>
   
-</div>

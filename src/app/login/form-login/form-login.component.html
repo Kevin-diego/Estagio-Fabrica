@@ -8,14 +8,14 @@
 
   <div class="formularioLogin">
   
-    <form>
+    <form [formGroup]="formulario">
       <div class="formNomeUsuario">
 
         <div class="row">
           
           <label for="Nome">Nome:</label>     
           <div class="col-12 col-sm-10">
-              <input type="text" class="form-control">
+              <input type="text" class="form-control"  placeholder="nome" pInputText [(ngModel)]="usuario.nome" formControlName="nome" name="nome">
           </div>          
         </div>
       </div>
@@ -26,7 +26,7 @@
             
             <label for="Nome">E-mail:</label>            
             <div class="col-12 col-sm-10">
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" placeholder="email" pInputText [(ngModel)]="usuario.email"  formControlName="email"name="email">
             </div>          
           </div>
       </div>
@@ -37,15 +37,15 @@
           
           <label for="Nome">Senha:</label>
           <div class="col-12 col-sm-5">
-              <input type="password" class="form-control">
+              <input type="text" class="form-control" placeholder="senha" pInputText [(ngModel)]="usuario.senha" formControlName="senha" name="senha">
           </div>   
           
           
           
-          
+<!--           
           <div class="col-12 col-sm-5">
               <input type="password" class="form-control" placeholder="Confirmar Senha">
-          </div>    
+          </div>     -->
         </div>
     </div>
 
@@ -54,9 +54,9 @@
     
                 <div class="btnForm">
                     
-                    <button type="button" class="btn btn-primary" id="btnSalvar">Salvar</button>
-                    <button type="button" class="btn btn-danger" id="btnVoltar">Voltar</button>
-              
+                    <button type="button" class="btn btn-primary" id="btnSalvar" (click)="salvar()" [disabled]="formulario.invalid">Salvar</button>
+                    <button type="button" class="btn btn-danger" (click)="buttonVoltar()" id="btnVoltar">Voltar</button>
+          
                   </div>
   </div>
 

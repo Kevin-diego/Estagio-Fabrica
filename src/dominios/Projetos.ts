@@ -1,6 +1,6 @@
 export class Projetos{
-    id: number;
-    nomeProjeto: string;
+    idProjeto: number;
+    nome: string;
     autor: string;
     descricao: string;
     dataCriacao: string;
